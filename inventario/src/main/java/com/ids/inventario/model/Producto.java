@@ -1,5 +1,6 @@
 package com.ids.inventario.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,10 +20,10 @@ public class Producto {
     private Long id;
 
     @NotBlank(message = "El nombre es obligatorio")
-    @Column(nullable =false)
+    @Column(nullable = false)
     private String nombre;
 
-    private String description;
+    private String descripcion;
 
     @NotNull(message = "El precio es obligatorio")
     @Positive(message = "El precio debe ser mayor a 0")
@@ -35,5 +36,6 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "categoria_id", nullable = false)
     @NotNull(message = "La categoria es obligatoria")
+    @JsonBackReference
     private Categoria categoria;
 }

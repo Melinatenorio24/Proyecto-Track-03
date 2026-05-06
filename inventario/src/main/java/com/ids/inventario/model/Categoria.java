@@ -1,10 +1,13 @@
 package com.ids.inventario.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 
 @Entity
@@ -22,4 +25,7 @@ public class Categoria {
     private String nombre;
 
     private String descripcion;
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Producto> productos;
 }
